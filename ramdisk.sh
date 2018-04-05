@@ -61,7 +61,7 @@ delete() {
 subcommand="$1"
 if [ "$subcommand" = "create" ]
 then
-    create "$2" "$3"
+    create "$2" "$3" "$4"
 elif [ "$subcommand" = "delete" ]
 then
     delete "$2"
