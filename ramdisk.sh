@@ -37,25 +37,27 @@ create() {
     # seems to help with preventing issue where some disks did not mount
     sleep 1
     # success
-    echo "Formatting ramdisk with hfs..."
     newfs_hfs -v "$label" "$device" || exit 1
-    echo "Formatting ramdisk with hfs..."
+    echo "Formatted ramdisk $device with hfs"
+    
     # Store permissions from old mount point.
     eval "$(/usr/bin/stat -s "$mount_point")"
     # Mount the RAM disk to the target mount point.
+    echo "Mounting $device on $mount_point"
     sudo mount -t hfs -o noatime -o union -o nobrowse "$device" "$mount_point" || exit 1
     # Restore permissions like they were on old volume.
-    sudo chown $st_uid:$st_gid "$mount_point" || exit 1
-    sudo chmod $st_mode "$mount_point" || exit 1
+    echo "Restoring owner and group ($st_uid:$st_gid) on $mount_point ..."
+    sudo chown "$st_uid":"$st_gid" "$mount_point" || exit 1
+    echo "Restoring permissions ($st_mode) on $mount_point ..."
+    sudo chmod "$st_mode" "$mount_point" || exit 1
 }
 
 delete() {
     local device="$1"
-    sudo umount -f "$device" || exit 1
+    echo "Detaching $device ..."
     sudo hdiutil detach "$device" || exit 1
 }
 
-set -x
 subcommand="$1"
 if [ "$subcommand" = "create" ]
 then
