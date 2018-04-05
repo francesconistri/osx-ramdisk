@@ -2,12 +2,12 @@ PREFIX:=/usr/local
 
 install:
 	cp ramdisks-service.sh ramdisk.sh $(PREFIX)/bin/
-	cp ./RamdisksService.plist /Library/LaunchDaemons
-	launchctl load -w /Library/LaunchDaemons/RamdisksService.plist
+	sudo cp ./com.rj.ramdisks.plist /Library/LaunchDaemons
+	sudo launchctl load -w /Library/LaunchDaemons/com.rj.ramdisks.plist
 	
 uninstall:
-	launchctl unload -w /Library/LaunchDaemons/RamdisksService.plist
-	rm -f /Library/LaunchDaemons/RamdisksService.plist
-	$(prefix)/ramdisks-service.sh stop
-	rm -f ramdisks-service.sh ramdisk.sh
+	sudo launchctl unload -w /Library/LaunchDaemons/com.rj.ramdisks.plist
+	sudo rm -f /Library/LaunchDaemons/com.rj.ramdisks.plist
+	$(PREFIX)/ramdisks-service.sh stop
+	rm -f $(PREFIX)/ramdisks-service.sh $(PREFIX)/ramdisk.sh
 

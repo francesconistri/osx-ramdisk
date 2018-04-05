@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 subcommand="$1"
-ramdisk_script="ramdisk.sh"
+ramdisk_script="/usr/local/bin/ramdisk.sh"
 
 if [ -z "$subcommand" ]; then
 echo "Usage: $0 [start|stop|restart] "
