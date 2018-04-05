@@ -17,14 +17,16 @@ StartService () {
     ConsoleMessage "Starting ramdisks ..."
     $ramdisk_script create /private/tmp 256
     $ramdisk_script create /private/var/run 64
-    $ramdisk_script create /private/var/folders 1024
+    # $ramdisk_script create /private/var/folders 1024
+    $ramdisk_script create /Users/francesconistri/local/tmp 1024
 }
 
 StopService () {
     ConsoleMessage "Stopping ramdisks ..."
     $ramdisk_script delete /private/tmp
     $ramdisk_script delete /private/var/run
-    $ramdisk_script delete /private/var/folders
+    # $ramdisk_script delete /private/var/folders
+    $ramdisk_script delete /Users/francesconistri/local/tmp
 }
 
 RestartService () {
