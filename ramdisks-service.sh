@@ -14,7 +14,7 @@ test -r /etc/rc.common || exit 1
 . /etc/rc.common
 
 StartService () {
-    ConsoleMessage "Starting ramdisks ..."
+    echo "Starting ramdisks ..."
     $ramdisk_script create /private/tmp 256
     $ramdisk_script create /private/var/run 64
     # $ramdisk_script create /private/var/folders 1024
@@ -22,7 +22,7 @@ StartService () {
 }
 
 StopService () {
-    ConsoleMessage "Stopping ramdisks ..."
+    echo "Stopping ramdisks ..."
     $ramdisk_script delete /private/tmp
     $ramdisk_script delete /private/var/run
     # $ramdisk_script delete /private/var/folders
@@ -30,7 +30,7 @@ StopService () {
 }
 
 RestartService () {
-    ConsoleMessage "Restarting ramdisks ..."
+    echo "Restarting ramdisks ..."
     StopService
     StartService
 }
